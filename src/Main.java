@@ -5,22 +5,31 @@ import java.awt.event.ActionListener;
 
 class Interface extends JFrame implements ActionListener {
 
-    JCheckBox check1 , check2;
-    JTextField textField;
+    JRadioButton rb1 , rb2 , rb3;
+    JLabel lable;
 
     Interface() {
-        check1 = new JCheckBox("Bold");
-        check2 = new JCheckBox("Italic");
 
-        textField = new JTextField(20);
+        ButtonGroup grup = new ButtonGroup();
+        rb1 = new JRadioButton("Orange");
+        rb2 = new JRadioButton("Mango");
+        rb3 = new JRadioButton("Apple");
+
+        grup.add(rb1);
+        grup.add(rb2);
+        grup.add(rb3);
+
+        lable = new JLabel("Not Select");
+
+        rb1.addActionListener(this);
+        rb2.addActionListener(this);
+        rb3.addActionListener(this);
 
         this.setLayout(new FlowLayout());
-        this.add(check1);
-        this.add(check2);
-        this.add(textField);
-
-        check1.addActionListener(this);
-        check2.addActionListener(this);
+        this.add(rb1);
+        this.add(rb2);
+        this.add(rb3);
+        this.add(lable);
 
 
 
@@ -29,16 +38,16 @@ class Interface extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int bold = Font.PLAIN;
-        int italic = Font.PLAIN;
 
-        if (check1.isSelected()){
-            bold = Font.BOLD;
+        if (rb1.isSelected()){
+            lable.setText(rb1.getText());
         }
-        if(check2.isSelected()){
-            italic = Font.ITALIC;
+        if (rb2.isSelected()){
+            lable.setText(rb2.getText());
         }
-        textField.setFont(new Font("",bold|italic,12)) ;
+        if (rb3.isSelected()){
+            lable.setText(rb3.getText());
+        }
 
 
     }
