@@ -5,16 +5,40 @@ import java.awt.event.ActionListener;
 
 class Interface extends JFrame implements ActionListener {
 
-
+    JCheckBox check1 , check2;
+    JTextField textField;
 
     Interface() {
+        check1 = new JCheckBox("Bold");
+        check2 = new JCheckBox("Italic");
+
+        textField = new JTextField(20);
+
+        this.setLayout(new FlowLayout());
+        this.add(check1);
+        this.add(check2);
+        this.add(textField);
+
+        check1.addActionListener(this);
+        check2.addActionListener(this);
+
+
 
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        int bold = Font.PLAIN;
+        int italic = Font.PLAIN;
 
+        if (check1.isSelected()){
+            bold = Font.BOLD;
+        }
+        if(check2.isSelected()){
+            italic = Font.ITALIC;
+        }
+        textField.setFont(new Font("",bold|italic,12)) ;
 
 
     }
