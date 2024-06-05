@@ -1,79 +1,81 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-class Interface extends JFrame implements ActionListener {
-    JButton bt1 , bt2 , bt3 , bt4 , bt5 , pbt6 , pbt7 , pbt1 , pbt2 , pbt3;
-    JPanel panel1 , panel2;
+class Contact{
+    private String name;
+    private String phoneNumber;
 
+    public Contact(String name , String phoneNumber){
+        this.name = name;
+        this.phoneNumber = phoneNumber;
 
-    Interface() {
-        bt1 = new JButton("North");
-        bt2 = new JButton("South");
-        bt3 = new JButton("East");
-        bt4 = new JButton("West");
-        bt5 = new JButton("Center");
+    }
+    public String getName(){
+        return  name;
+    }
+    public String getPhoneNumber(){
+        return phoneNumber;
+    }
+    public String toString(){
+        return name + " - " + phoneNumber;
+    }
 
-        pbt1 = new JButton("panelButtonOne");
-        pbt2 = new JButton("panelButtonTwo");
-        pbt3 = new JButton("panelButtonThree");
-        pbt6 = new JButton("panelButtonThree");
-        pbt7 = new JButton("panelButtonThree");
+}
 
-
-
-        panel1 = new JPanel();
-        panel1.setLayout(new GridLayout(3,1));
-        panel1.setBackground(Color.darkGray);
-
-        panel2 = new JPanel();
-        panel2.setLayout(new GridLayout(2,1));
-        panel2.setBackground(Color.BLUE);
-
-        panel1.add(pbt1);
-        panel1.add(pbt2);
-        panel1.add(pbt3);
-
-       panel2.add(pbt6);
-       panel2.add(pbt7);
-
-
-        this.add(bt1,BorderLayout.NORTH);
-        this.add(bt2,BorderLayout.SOUTH);
-        //this.add(bt3,BorderLayout.EAST);
-        this.add(bt4,BorderLayout.WEST);
-        this.add(panel1,BorderLayout.CENTER);
-        this.add(panel2,BorderLayout.EAST);
+class MyFrame extends JFrame{
+    private DefaultListModel <String> listModel;
 
 
 
 
+    private JList <String> contactList;
+    JPanel inputPanel , buttonPanel;
+    JScrollPane scrollPane;
+    JButton addButton , deleteButton;
+    JLabel nameLable1 , phoneLable2;
+    JTextField nameField , phoneField;
+
+    MyFrame(){
+
+        listModel = new DefaultListModel<>();
+        contactList = new JList<>(listModel );
+
+        Contact dummyContact = new Contact("Kamal","0774342801");
+        listModel.addElement(dummyContact.toString());
+
+        inputPanel = new JPanel(new GridLayout(2,2));
+        buttonPanel = new JPanel(new FlowLayout());
+
+        nameLable1 = new JLabel("Name : ");
+        phoneLable2 = new JLabel("Phone Number : ");
+        nameField = new JTextField();
+        phoneField = new JTextField();
+        scrollPane = new JScrollPane(contactList);
+        scrollPane.setBackground(Color.BLACK);
+
+        inputPanel.add(nameLable1);     inputPanel.add(nameField);
+        inputPanel.add(phoneLable2);    inputPanel.add(phoneField);
+
+        addButton = new JButton("Add Contact");
+        deleteButton = new JButton("Delete Contact");
+
+        buttonPanel.add(addButton);     buttonPanel.add(deleteButton);
+
+        this.add(inputPanel,BorderLayout.NORTH);
+        this.add(scrollPane,BorderLayout.CENTER);
+        this.add(buttonPanel,BorderLayout.SOUTH);
 
     }
 
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-
-
-
-    }
 }
 
 
-class main {
-
+class Main{
     public static void main(String[] args) {
-        Interface frame = new Interface();
-
-        frame.setTitle("Test");
-        frame.setSize(400, 700);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        MyFrame frame = new MyFrame();
         frame.setVisible(true);
-        frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-
-
+        frame.setTitle("Contact Manager");
+        frame.setSize(400,350);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }
