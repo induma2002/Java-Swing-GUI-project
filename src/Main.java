@@ -4,32 +4,49 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class Interface extends JFrame implements ActionListener {
+    JButton bt1 , bt2 , bt3 , bt4 , bt5 , pbt6 , pbt7 , pbt1 , pbt2 , pbt3;
+    JPanel panel1 , panel2;
 
-    JRadioButton rb1 , rb2 , rb3;
-    JLabel lable;
 
     Interface() {
+        bt1 = new JButton("North");
+        bt2 = new JButton("South");
+        bt3 = new JButton("East");
+        bt4 = new JButton("West");
+        bt5 = new JButton("Center");
 
-        ButtonGroup grup = new ButtonGroup();
-        rb1 = new JRadioButton("Orange");
-        rb2 = new JRadioButton("Mango");
-        rb3 = new JRadioButton("Apple");
+        pbt1 = new JButton("panelButtonOne");
+        pbt2 = new JButton("panelButtonTwo");
+        pbt3 = new JButton("panelButtonThree");
+        pbt6 = new JButton("panelButtonThree");
+        pbt7 = new JButton("panelButtonThree");
 
-        grup.add(rb1);
-        grup.add(rb2);
-        grup.add(rb3);
 
-        lable = new JLabel("Not Select");
 
-        rb1.addActionListener(this);
-        rb2.addActionListener(this);
-        rb3.addActionListener(this);
+        panel1 = new JPanel();
+        panel1.setLayout(new GridLayout(3,1));
+        panel1.setBackground(Color.darkGray);
 
-        this.setLayout(new FlowLayout());
-        this.add(rb1);
-        this.add(rb2);
-        this.add(rb3);
-        this.add(lable);
+        panel2 = new JPanel();
+        panel2.setLayout(new GridLayout(2,1));
+        panel2.setBackground(Color.BLUE);
+
+        panel1.add(pbt1);
+        panel1.add(pbt2);
+        panel1.add(pbt3);
+
+       panel2.add(pbt6);
+       panel2.add(pbt7);
+
+
+        this.add(bt1,BorderLayout.NORTH);
+        this.add(bt2,BorderLayout.SOUTH);
+        //this.add(bt3,BorderLayout.EAST);
+        this.add(bt4,BorderLayout.WEST);
+        this.add(panel1,BorderLayout.CENTER);
+        this.add(panel2,BorderLayout.EAST);
+
+
 
 
 
@@ -39,15 +56,7 @@ class Interface extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (rb1.isSelected()){
-            lable.setText(rb1.getText());
-        }
-        if (rb2.isSelected()){
-            lable.setText(rb2.getText());
-        }
-        if (rb3.isSelected()){
-            lable.setText(rb3.getText());
-        }
+
 
 
     }
